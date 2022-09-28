@@ -1,0 +1,13 @@
+@font-face {
+    font-family: marioFont1;
+    src: url(font/Vampire\ Wars.ttf);
+  }
+  @font-face {
+    font-family: marioFont2;
+    src: url(font/Mermaid1001.ttf);
+  }
+  
+  @font-face {
+    font-family: marioFont3;
+    src: url(font/GothamMedium.ttf);
+  }
