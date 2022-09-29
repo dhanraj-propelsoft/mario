@@ -17,7 +17,7 @@
     width: 100vw;
     height: 2px;
     background-color: red;
-    animation: afterEffect 2s 1;
+    animation: afterEffect 3s 1;
     border-radius: 25px;
   }
   @keyframes afterEffect{

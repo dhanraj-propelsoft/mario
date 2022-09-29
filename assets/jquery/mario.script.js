@@ -12,7 +12,7 @@ $('#mob-num').keyup(function(){
 });
 setTimeout(function() {
     $('.splash-screen').hide();
-}, 2000);
+}, 3000);
 $(".back").click(function (){
     window.history.back();
   });
