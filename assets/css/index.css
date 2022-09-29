@@ -486,7 +486,7 @@ fieldset {
 .qrcode-image{
   width: 200px;
   height: 200px;
-  background-image: url("http://localhost/mario/assets/img/qr.webp");
+  background-image: url("../img/qr.webp");
   background-size: cover;
   margin: auto;
 }
@@ -518,7 +518,7 @@ fieldset {
   width: 200px;
 height: 200px;
 margin: auto;
-background-image: url("http://localhost/mario/assets/img/cm.jpg");
+background-image: url("../img/cm.jpg");
 background-size: cover;
 }
 .success-info{

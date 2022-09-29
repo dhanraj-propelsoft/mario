@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mario Precision</title>
     <link rel="stylesheet" href="assets/css/index.css">
-    <script src="http://localhost/php/mario/assets/jquery/jquery.min.js"></script>
+    <script src="assets/jquery/jquery.min.js"></script>
 </head>
 <body>
     
