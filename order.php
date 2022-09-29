@@ -10,7 +10,7 @@ include 'config/config.php';
         <path fill-rule="evenodd" d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
       </svg>
     </div>
-    <form action="bankDetails.php">
+    <form action="orderConfirm.php" method="post">
       <fieldset>
         <input placeholder="Company Name..." type="text" tabindex="1" required autofocus name="companyName">
       </fieldset>
@@ -48,7 +48,7 @@ include 'config/config.php';
         <input placeholder="Town/City..." type="text" tabindex="5" required name="town">
       </fieldset>
       <fieldset>
-        <textarea id="w3review" name="w3review" rows="4" cols="66" name="address"></textarea>
+        <textarea id="w3review" rows="4" cols="66" name="address"></textarea>
       </fieldset>
 
 

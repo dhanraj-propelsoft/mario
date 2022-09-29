@@ -1,4 +1,7 @@
-<?php include 'layout/header.php'; ?>
+<?php
+ include 'layout/header.php'; 
+ include 'config/config.php';
+ ?>
 <link rel="stylesheet" href="assets/css/splashScreen.css">
 
 
@@ -39,7 +42,7 @@
             change the sponge or woolen buffer pad.
 
         </p>
-        <button class="btn-bn" onclick="window.location.href = 'orderSuccess.php';">Book know</button>
+        <button class="btn-bn" onclick="window.location.href = 'order.php';">Book Now</button>
     </div>
     </div>
 
