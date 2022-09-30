@@ -1,15 +1,15 @@
 <?php
- include 'layout/header.php'; 
- include 'config/config.php';
- ?>
+include 'layout/header.php';
+include 'config/config.php';
+?>
 <link rel="stylesheet" href="assets/css/splashScreen.css">
 
 
 <h1>Today's Deal</h1>
 <div class="item-container">
-    
-   <div class="sub-container-A">
-       
+
+    <div class="sub-container-A">
+
         <p class="product-title">HI speed Polisher /3 Attachment
             Bluepoint /model EL7620
         </p>
@@ -20,11 +20,8 @@
             <div class="product-bit-image-container">
                 <div class="product-bit-images"><img src="assets/img/product-bit-image.jpg" alt=""></div>
                 <div class="product-bit-images"><img src="assets/img/product-bit-image-2.jpg" alt=""></div>
-                <div class="product-bit-images"><iframe width="560" height="315"
-                        src="https://www.youtube.com/embed/KFO6F1l-h4M" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
-                        <div class="myVideoOverlay"></div>
+                <div class="product-bit-images"><iframe width="560" height="315" src="https://www.youtube.com/embed/KFO6F1l-h4M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <div class="myVideoOverlay"></div>
                 </div>
             </div>
         </div>
@@ -44,7 +41,7 @@
         </p>
         <button class="btn-bn" onclick="window.location.href = 'order.php';">Book Now</button>
     </div>
-    </div>
+</div>
 
 </section>
 <div class="splash-screen">

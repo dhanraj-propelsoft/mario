@@ -21,7 +21,7 @@ ON products.id = order_details.product_id;");
                 <th>Date</th>
                 <th>Gst</th>
                 <th>Mobile</th>
-                <th>Quantity</th>              
+                <th>Quantity</th>
                 <th>Town</th>
                 <th>District</th>
                 <th>Address</th>
@@ -30,7 +30,6 @@ ON products.id = order_details.product_id;");
         </thead>
         <tbody>
             <?php
-
             if (mysqli_num_rows($orderList) > 0) {
                 $n = 1;
                 while ($row = mysqli_fetch_array($orderList)) {
@@ -38,10 +37,10 @@ ON products.id = order_details.product_id;");
                         <td><?php echo $n; ?></td>
                         <td><?php echo $row['productName']; ?></td>
                         <td><?php echo $row['company_name']; ?></td>
-                        <td><?php echo date('d-m-Y',strtotime($row['date'])); ?></td>
+                        <td><?php echo date('d-m-Y', strtotime($row['date'])); ?></td>
                         <td><?php echo $row['gst']; ?></td>
                         <td><?php echo $row['mobile']; ?></td>
-                        <td><?php echo $row['quantity']; ?></td>                      
+                        <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['town']; ?></td>
                         <td><?php echo $row['cityName']; ?></td>
                         <td><?php echo $row['address']; ?></td>
