@@ -1,47 +1,53 @@
 <?php
 include 'layout/header.php';
 include 'config/config.php';
+$productList = mysqli_query($con, "select*from products");
 ?>
 <link rel="stylesheet" href="assets/css/splashScreen.css">
 
 
 <h1>Today's Deal</h1>
 <div class="item-container">
+    <?php
+    while ($row = mysqli_fetch_array($productList)) {
 
-    <div class="sub-container-A">
+        $path = "uploads/";
+        ?>
+        <div class="sub-container-A">
 
-        <p class="product-title">HI speed Polisher /3 Attachment
-            Bluepoint /model EL7620
-        </p>
-        <div class="product-image-container">
-            <div class="product-full-image">
-                <img src="assets/img/productFullImage.jpg" alt="">
-            </div>
-            <div class="product-bit-image-container">
-                <div class="product-bit-images"><img src="assets/img/product-bit-image.jpg" alt=""></div>
-                <div class="product-bit-images"><img src="assets/img/product-bit-image-2.jpg" alt=""></div>
-                <div class="product-bit-images"><iframe width="560" height="315" src="https://www.youtube.com/embed/KFO6F1l-h4M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <div class="myVideoOverlay"></div>
+            <p class="product-title"><?php echo $row['name']; ?>
+            </p>
+            <div class="product-image-container">
+                <div class="product-full-image">
+                    <img src="<?php echo $path . $row['image_1']; ?>" alt="">
+                </div>
+                <div class="product-bit-image-container">
+                    <div class="product-bit-images"><img src="<?php echo $path . $row['image_2']; ?>" alt=""></div>
+                    <div class="product-bit-images"><img src="<?php echo $path . $row['image_3']; ?>" alt=""></div>
+                    <div class="product-bit-images"><iframe width="560" height="315" src="<?php echo $row['youtube_link']; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <div class="myVideoOverlay"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="price-container">
-            <p class="mrp">MRP : ₹ <s>9660</s></p>
-            <p class="sp">Special Price : ₹ 3660</p>
-        </div>
-        <div class="price-container">
-            <p class="desc">Description :</p>
-            <p class="qty">Available Quantity : 5</p>
-        </div>
-        <p>
-            Polishing pad can be used in pneumatic or electric polishing machine, which for car detail polishing.
-            Adhesive backing, you can change pads just in seconds. The back of the disk has Velcro, so you can easily
-            change the sponge or woolen buffer pad.
+            <div class="price-container">
+                <p class="mrp">MRP : ₹ <s><?php echo $row['mrp']; ?></s></p>
+                <p class="sp">Special Price :<?php echo $row['sprice']; ?></p>
+            </div>
+            <div class="price-container">
+                <p class="desc">Description :</p>
+                <p class="qty">Available Quantity : <?php echo $row['quantity']; ?></p>
+            </div>
+            <p>
+                <?php echo $row['description']; ?>
 
-        </p>
-        <button class="btn-bn" onclick="window.location.href = 'order.php';">Book Now</button>
-    </div>
+            </p>
+            <a href="order.php?productId=<?php echo $row['id'];?>"><button class="btn-bn">Book Now</button></a>
+           
+        </div>
+    <?php } ?>
 </div>
+
+
 
 </section>
 <div class="splash-screen">
@@ -52,6 +58,14 @@ include 'config/config.php';
     </div>
 
 </div>
+<script>
+    var a = $("iframe").attr("src");
+    var aSplit = a.split("/");
+    if (aSplit[2] == "youtu.be") {
+        var aSplitl = aSplit.length - 1;
+        $("iframe").attr("src", "https://www.youtube.com/embed/" + aSplit[aSplitl]);
+    }
+</script>
 <?php include 'layout/footer.php'; ?>
 <!-- MRP : 9900 Special Price : 4999
 Available Qty : 5Description

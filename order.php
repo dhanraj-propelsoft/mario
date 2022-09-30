@@ -1,6 +1,7 @@
 <?php
 include 'layout/header.php';
 include 'config/config.php';
+$productId = $_GET['productId'];
 ?>
 <div class="main-container">
   <div class="sub-container-A">
@@ -12,6 +13,7 @@ include 'config/config.php';
     </div>
     <form action="orderConfirm.php" method="post">
       <fieldset>
+        <input type="hidden" name="productId" value="<?php echo $productId;?>">
         <input placeholder="Company Name..." type="text" tabindex="1" required autofocus name="companyName">
       </fieldset>
       <fieldset>
