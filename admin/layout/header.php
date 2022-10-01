@@ -1,3 +1,13 @@
+<?php  
+session_start();  
+  
+if(!$_SESSION['name'])  
+{  
+  
+    header("Location: login.php");//redirect to the login page to secure the welcome page without login access.  
+}  
+  
+?> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,6 +36,7 @@
       <div class="brand-name">
         <h1><span>M</span>ario <span>P</span>recision <span>A</span>utomotive</h1>
       </div>
+      <a href="logout.php"><button>Logout here</button></a>
     </div>
   </header>
   <section class="body-container">

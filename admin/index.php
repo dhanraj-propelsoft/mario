@@ -1,7 +1,9 @@
 <?php
 include "layout/header.php";
 include '../config/config.php';
+ 
 $productList = mysqli_query($con, "select*from products");
+
 ?>
 <h1>Products</h1>
 <a href="add_product.php"><button style="float:right;height:30px;width:150px;">Add Product</button></a>
@@ -18,7 +20,7 @@ $productList = mysqli_query($con, "select*from products");
                 <th>MRP</th>
                 <th>Special Price</th>
                 <th>Total Quantity</th>
-                <th>Current Quantity</th>
+                <th>Current Quantity</th>              
                 <th>Action</th>
 
             </tr>
@@ -37,6 +39,7 @@ $productList = mysqli_query($con, "select*from products");
                         <td><?php echo $row['sprice']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
+                                             
 
                         <td> <a href="viewProduct.php?product_id=<?php echo $row['id']; ?>" class="btn btn-primary">view<i class="glyphicon glyphicon-edit"></i></a></td>
                     </tr><?php

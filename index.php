@@ -59,12 +59,14 @@ $productList = mysqli_query($con, "select*from products");
 
 </div>
 <script>
-    var a = $("iframe").attr("src");
-    var aSplit = a.split("/");
+    var a = $("iframe");
+  for (let i = 0; i< a.length; i++) {
+    var aSplit = a[i].getAttribute("src").split("/");
     if (aSplit[2] == "youtu.be") {
         var aSplitl = aSplit.length - 1;
-        $("iframe").attr("src", "https://www.youtube.com/embed/" + aSplit[aSplitl]);
+        a[i].setAttribute("src", "https://www.youtube.com/embed/" + aSplit[aSplitl]);
     }
+  }
 </script>
 <?php include 'layout/footer.php'; ?>
 <!-- MRP : 9900 Special Price : 4999

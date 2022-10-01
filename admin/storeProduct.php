@@ -1,6 +1,9 @@
 
 <?php
 include '../config/config.php';
+$date = $_POST['date'];
+
+
 $productname = $_POST['productName'];
 $mrp = $_POST['mrp'];
 $sprice = $_POST['sprice'];
@@ -12,8 +15,9 @@ $targetDir = "../uploads/";
 $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'jfif');
 
 $statusMsg = $errorMsg = $insertValuesSQL = $errorUpload = $errorUploadType = '';
+$updateQuery1 = $con->query("UPDATE products set active_status=0");
 
-$insertQuery1 = $con->query("INSERT INTO products (name,mrp,quantity,sprice,description,youtube_link) VALUES ('$productname','$mrp','$quantity','$sprice','$description','$youtubeLink')");
+$insertQuery1 = $con->query("INSERT INTO products (date,name,mrp,quantity,sprice,description,youtube_link,active_status) VALUES ('$date','$productname','$mrp','$quantity','$sprice','$description','$youtubeLink',1)");
 $last_inserted_id = $con->insert_id;
 
 
@@ -56,5 +60,9 @@ if (!empty($fileNames)) {
         }
     }
 }
-echo $statusMsg;
+if ($insertQuery1) {
+
+    echo "<script>alert('Product has been Added successfully')</script>";
+    echo "<script>window.open('index.php', '_self')</script>";
+}
 ?>

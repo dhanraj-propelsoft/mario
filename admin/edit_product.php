@@ -14,7 +14,8 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
         box-sizing: border-box;
     }
 
-    input[type=text],
+    input[type=text],input[type=date],
+    input[type=number],
     select,
     textarea {
         width: 100%;
@@ -184,6 +185,14 @@ while ($row = mysqli_fetch_array($productList)) {
     ?>
     <div class="container">
         <form enctype="multipart/form-data" action="updateProduct.php" method="post" id="order_form">
+        <div class="row">
+            <div class="col-25">
+                <label for="date">Date</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="date" name="date" required="required" value="<?php echo $row['date']; ?>">
+            </div>
+        </div>
             <div class="row">
                 <div class="col-25">
                     <label for="productName">Product Name</label>
@@ -198,7 +207,7 @@ while ($row = mysqli_fetch_array($productList)) {
                     <label for="mrp">MRP</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="mrp" name="mrp" placeholder="MRP.." required="required" value="<?php echo $row['mrp']; ?>">
+                    <input type="number" id="mrp" name="mrp" placeholder="MRP.." required="required" value="<?php echo $row['mrp']; ?>">
                 </div>
             </div>
             <div class="row">
@@ -206,7 +215,7 @@ while ($row = mysqli_fetch_array($productList)) {
                     <label for="sprice">Special Price</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="sprice" name="sprice" placeholder="Special Price.." required="required" value="<?php echo $row['sprice']; ?>">
+                    <input type="number" id="sprice" name="sprice" placeholder="Special Price.." required="required" value="<?php echo $row['sprice']; ?>">
                 </div>
             </div>
             <div class="row">
@@ -214,7 +223,7 @@ while ($row = mysqli_fetch_array($productList)) {
                     <label for="quantity">Quantity</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="quantity" name="quantity" placeholder="Quantity.." required="required" value="<?php echo $row['quantity']; ?>">
+                    <input type="number" id="quantity" name="quantity" placeholder="Quantity.." required="required" value="<?php echo $row['quantity']; ?>">
                 </div>
             </div>
 

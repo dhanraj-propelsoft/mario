@@ -44,17 +44,15 @@ while ($row = mysqli_fetch_array($productList)) {
                 </div>
             </div>
             <div class="price-container">
-                <p class="mrp">MRP : ₹ <s>9660</s></p>
-                <p class="sp">Special Price : ₹ 3660</p>
+                <p class="mrp">MRP : ₹ <s><?php echo $row['mrp'];?></s></p>
+                <p class="sp">Special Price : ₹ <?php echo $row['sprice'];?></p>
             </div>
             <div class="price-container">
                 <p class="desc">Description :</p>
-                <p class="qty">Available Quantity : 5</p>
+                <p class="qty">Available Quantity :<?php echo $row['quantity'];?></p>
             </div>
             <p>
-                Polishing pad can be used in pneumatic or electric polishing machine, which for car detail polishing.
-                Adhesive backing, you can change pads just in seconds. The back of the disk has Velcro, so you can easily
-                change the sponge or woolen buffer pad.
+            <?php echo $row['description'];?>
 
             </p>
             <a href="edit_product.php?id=<?php echo $id;?>"><button class="btn-bn">Edit</button></a>

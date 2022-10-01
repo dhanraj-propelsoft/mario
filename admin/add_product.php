@@ -8,6 +8,7 @@ include '../config/config.php'; ?>
     }
 
     input[type=text],
+    input[type=date], input[type=number],
     select,
     textarea {
         width: 100%;
@@ -101,6 +102,7 @@ include '../config/config.php'; ?>
         background: white;
         color: black;
     }
+
     .cancelBtn {
         background-color: orange;
         color: white;
@@ -108,12 +110,20 @@ include '../config/config.php'; ?>
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        float: right; margin-right: 5px;
+        float: right;
+        margin-right: 5px;
     }
-
 </style>
 <div class="container">
     <form enctype="multipart/form-data" action="storeProduct.php" method="post" id="order_form">
+        <div class="row">
+            <div class="col-25">
+                <label for="date">Date</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="date" name="date" required="required">
+            </div>
+        </div>
         <div class="row">
             <div class="col-25">
                 <label for="productName">Product Name</label>
@@ -127,7 +137,7 @@ include '../config/config.php'; ?>
                 <label for="mrp">MRP</label>
             </div>
             <div class="col-75">
-                <input type="text" id="mrp" name="mrp" placeholder="MRP.." required="required">
+                <input type="number" id="mrp" name="mrp" placeholder="MRP.." required="required">
             </div>
         </div>
         <div class="row">
@@ -135,7 +145,7 @@ include '../config/config.php'; ?>
                 <label for="sprice">Special Price</label>
             </div>
             <div class="col-75">
-                <input type="text" id="sprice" name="sprice" placeholder="Special Price.." required="required">
+                <input type="number" id="sprice" name="sprice" placeholder="Special Price.." required="required">
             </div>
         </div>
         <div class="row">
@@ -143,7 +153,7 @@ include '../config/config.php'; ?>
                 <label for="quantity">Quantity</label>
             </div>
             <div class="col-75">
-                <input type="text" id="quantity" name="quantity" placeholder="Quantity.." required="required">
+                <input type="number" id="quantity" name="quantity" placeholder="Quantity.." required="required">
             </div>
         </div>
 
@@ -180,7 +190,7 @@ include '../config/config.php'; ?>
 
             <div class="row">
                 <input type="submit" value="Submit">
-                <button type="button"  onclick="location.href='index.php'" class="cancelBtn" >Cancel</button>&nbsp;&nbsp;
+                <button type="button" onclick="location.href='index.php'" class="cancelBtn">Cancel</button>&nbsp;&nbsp;
             </div>
     </form>
 </div>
@@ -195,15 +205,15 @@ include '../config/config.php'; ?>
                 },
                 mrp: {
                     required: true,
-                    minlength: 3
+                    minlength: 2
                 },
                 sprice: {
                     required: true,
-                    minlength: 3
+                    minlength: 2
                 },
                 quantity: {
                     required: true,
-                    minlength: 3
+                    minlength: 1
                 },
 
 

@@ -10,6 +10,68 @@ ON products.id = order_details.product_id;");
     <h1>Customer Request</h1>
 </center>
 <br>
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 45px;
+        height: 20px;
+        vertical-align: middle;
+        margin-top: 8px;
+    }
+
+    .switch input {
+        display: none;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #A1A6AB;
+        -webkit-transition: .4s;
+        transition: .4s;
+
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 14px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #800080;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
 <div class="container">
 
     <table>
@@ -25,6 +87,10 @@ ON products.id = order_details.product_id;");
                 <th>Town</th>
                 <th>District</th>
                 <th>Address</th>
+                <th>Show Page</th>
+                <th>Order Confirm</th>
+                <th>Payment Confirm</th>
+                <th>Delivery Status </th>
 
             </tr>
         </thead>
@@ -44,6 +110,22 @@ ON products.id = order_details.product_id;");
                         <td><?php echo $row['town']; ?></td>
                         <td><?php echo $row['cityName']; ?></td>
                         <td><?php echo $row['address']; ?></td>
+                        <td> <label class="switch ">
+                                <input type="checkbox" class="showPageSwitch" data-id="<?php echo $row['id']; ?>">
+                                <span class="slider round"></span>
+                            </label></td>
+                        <td> <label class="switch">
+                                <input type="checkbox"  class="orderConfirmSwitch" <?php echo ($row['approval_status'])?"checked":""; ?> data-id="<?php echo $row['id']; ?>">
+                                <span class="slider round"></span>
+                            </label></td>
+                        <td> <label class="switch">
+                                <input type="checkbox" >
+                                <span class="slider round"></span>
+                            </label></td>
+                        <td> <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label></td>
                     </tr><?php
                                     $n++;
                                 }
@@ -95,7 +177,54 @@ ON products.id = order_details.product_id;");
         font-size: 18px;
     }
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script type="text/javascript">
+    $('.orderConfirmSwitch').on('change', function() {
+        var id = $(this).attr('data-id');
+        var isChecked = $(this).is(":checked");
+        console.log("crct part"+isChecked);
+        console.log("Notcrct part"+!isChecked);
+        var checkResult = ($(this).is(":checked")) ? 1 : 0;
+      
 
+        var countName = "1";
+        var countCode = "1";
+
+        swal({
+            title: "Looks like you're from " + countName + ". ",
+            text: "Go to our International Store? ",
+            imageUrl: 'https://www.countryflags.io/' + countCode + '/flat/64.png',
+            imageWidth: 128,
+            imageHeight: 128,
+            showCancelButton: true,
+            showConfirmButton: true,
+            confirmButtonText: 'Yes take me there',
+            cancelButtonText: 'Stay on U.S.A Site',
+            imageAlt: 'Custom image',
+            dangerMode: false,
+        }, function() {
+            $.ajax({
+                type: "POST",
+                url: "changeProductStatus.php",
+                data: {id: id, checkResult: checkResult},
+                success: function(res) {
+                   if(res ==1){
+                    console.log("if part");
+                    $(this).attr("checked", isChecked);
+                   }else{
+                    console.log("elsepart");
+                    $('.orderConfirmSwitch').attr('checked', true);
+                   }
+                  
+                }
+            });
+        });
+
+    });
+</script>
 <?php
 include "layout/footer.php";
 ?>

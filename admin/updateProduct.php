@@ -2,7 +2,7 @@
 include '../config/config.php';
 $id = $_POST["id"];
 $productName = $_POST["productName"];
-
+$date = $_POST['date'];
 $mrp = $_POST["mrp"];
 $sprice = $_POST["sprice"];
 $quantity = $_POST["quantity"];
@@ -26,7 +26,7 @@ $oldImage3 =  $resultData['image_3'];
 $targetDir = "../uploads/";
 $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'jfif');
 
-$insertQuery1 = $con->query("UPDATE products set name='$productName',mrp='$mrp',quantity='$quantity',sprice='$sprice',description='$description',youtube_link='$youtube_link' where id ='$id'");
+$insertQuery1 = $con->query("UPDATE products set date='$date',name='$productName',mrp='$mrp',quantity='$quantity',sprice='$sprice',description='$description',youtube_link='$youtube_link' where id ='$id'");
 
 if ($image1) {
     $oldImagePath1 = $targetDir . $oldImage1;
@@ -135,6 +135,6 @@ if ($image3) {
 
 if ($insertQuery1) {
 
-    echo "<script>alert('product has been inserted successfully')</script>";
+    echo "<script>alert('Product has been Updated successfully')</script>";
     echo "<script>window.open('index.php', '_self')</script>";
 }
