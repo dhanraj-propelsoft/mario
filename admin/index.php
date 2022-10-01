@@ -68,11 +68,11 @@ $productList = mysqli_query($con, "select*from products");
     }
 </style>
 <h1>Products</h1>
-<a href="add_product.php"><button style="float:right;height:30px;width:150px;">Add Product</button></a>
+
 <br>
 <br>
 <div class="container">
-
+<a href="add_product.php"><button style="float:right;height:30px;width:150px;margin:40px 40px 5px 0;">Add Product</button></a>
     <table>
         <thead>
             <tr>
@@ -107,7 +107,7 @@ $productList = mysqli_query($con, "select*from products");
                                 <span class="slider round"></span>
                             </label></td>
 
-                        <td> <a href="viewProduct.php?product_id=<?php echo $row['id']; ?>" class="btn btn-primary">view<i class="glyphicon glyphicon-edit"></i></a></td>
+                        <td> <a href="viewProduct.php?product_id=<?php echo $row['id']; ?>" class="button">view<i class="glyphicon glyphicon-edit"></i></a></td>
                     </tr><?php
                                     $n++;
                                 }
@@ -130,7 +130,7 @@ $productList = mysqli_query($con, "select*from products");
 
     .container {
         width: 98%;
-        margin: auto;
+        margin:0 auto;
         overflow-x: auto !important;
     }
 

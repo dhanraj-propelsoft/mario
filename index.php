@@ -31,7 +31,7 @@ $productList = mysqli_query($con, "select*from products WHERE active_status='1' 
             </div>
             <div class="price-container">
                 <p class="mrp">MRP : ₹ <s><?php echo $row['mrp']; ?></s></p>
-                <p class="sp">Special Price :<?php echo $row['sprice']; ?></p>
+                <p class="sp">Special Price : ₹ <?php echo $row['sprice']; ?></p>
             </div>
             <div class="price-container">
                 <p class="desc">Description :</p>
