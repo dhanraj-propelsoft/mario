@@ -70,7 +70,7 @@ $productList = mysqli_query($con, "select*from products");
 <h1>Products</h1>
 
 <div class="container">
-<a href="add_product.php"><button style="float:right;height:30px;width:150px;margin:40px 40px 5px 0;">Add Product</button></a>
+    <a href="add_product.php"><button style="float:right;height:30px;width:150px;margin:40px 40px 5px 0;">Add Product</button></a>
     <table>
         <thead>
             <tr>
@@ -128,7 +128,7 @@ $productList = mysqli_query($con, "select*from products");
 
     .container {
         width: 98%;
-        margin:0 auto;
+        margin: 0 auto;
         overflow-x: auto !important;
     }
 
@@ -158,27 +158,36 @@ $productList = mysqli_query($con, "select*from products");
     }
 </style>
 <script type="text/javascript">
+    function ConfirmDelete() {
+        return confirm("Are you sure you want to Update?");
+    }
     $('.activeProductSwitch').on('change', function() {
-        var returnVal = confirm("Are you Sure Show Website?");
-        var id = $(this).attr('data-id');
-        var isChecked = $(this).is(":checked");
-        var checkResult = ($(this).is(":checked")) ? 1 : 0;
-        if($(this).is(":checked")){
-            $(this).attr("disabled",true);
-        }
-       
-        $.ajax({
-            type: "POST",
-            url: "changeProductStatus.php",
-            data: {
-                id: id,
-                activeStatus: checkResult
-            },
-            success: function(res) {
-                location.reload();
+        if (ConfirmDelete()) {
+            var id = $(this).attr('data-id');
+            var isChecked = $(this).is(":checked");
+            var checkResult = ($(this).is(":checked")) ? 1 : 0;
+            if ($(this).is(":checked")) {
+                $(this).attr("disabled", true);
             }
-        });
 
+            $.ajax({
+                type: "POST",
+                url: "changeProductStatus.php",
+                data: {
+                    id: id,
+                    activeStatus: checkResult
+                },
+                success: function(res) {
+                    location.reload();
+                }
+            });
+        } else {
+            console.log("else spot");
+            if ($(this).is(':checked'))
+                $(this).prop('checked', false);
+            else
+                $(this).prop('checked', true);
+        }
 
     });
 </script>
