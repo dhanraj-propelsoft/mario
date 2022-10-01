@@ -1,10 +1,72 @@
 <?php
 include "layout/header.php";
 include '../config/config.php';
- 
+
 $productList = mysqli_query($con, "select*from products");
 
 ?>
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 45px;
+        height: 20px;
+        vertical-align: middle;
+        margin-top: 8px;
+    }
+
+    .switch input {
+        display: none;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #A1A6AB;
+        -webkit-transition: .4s;
+        transition: .4s;
+
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 14px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #800080;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+</style>
 <h1>Products</h1>
 <a href="add_product.php"><button style="float:right;height:30px;width:150px;">Add Product</button></a>
 <br>
@@ -20,7 +82,8 @@ $productList = mysqli_query($con, "select*from products");
                 <th>MRP</th>
                 <th>Special Price</th>
                 <th>Total Quantity</th>
-                <th>Current Quantity</th>              
+                <th>Current Quantity</th>
+                <th>Show</th>
                 <th>Action</th>
 
             </tr>
@@ -39,7 +102,10 @@ $productList = mysqli_query($con, "select*from products");
                         <td><?php echo $row['sprice']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
                         <td><?php echo $row['quantity']; ?></td>
-                                             
+                        <td> <label class="switch">
+                                <input type="checkbox" class="activeProductSwitch" <?php echo ($row['active_status']) ? "checked" : ""; ?> <?php echo ($row['active_status']) ? "disabled" : ""; ?> data-id="<?php echo $row['id']; ?>">
+                                <span class="slider round"></span>
+                            </label></td>
 
                         <td> <a href="viewProduct.php?product_id=<?php echo $row['id']; ?>" class="btn btn-primary">view<i class="glyphicon glyphicon-edit"></i></a></td>
                     </tr><?php
@@ -93,6 +159,31 @@ $productList = mysqli_query($con, "select*from products");
         font-size: 18px;
     }
 </style>
+<script type="text/javascript">
+    $('.activeProductSwitch').on('change', function() {
+        var returnVal = confirm("Are you Sure Show Website?");
+        var id = $(this).attr('data-id');
+        var isChecked = $(this).is(":checked");
+        var checkResult = ($(this).is(":checked")) ? 1 : 0;
+        if($(this).is(":checked")){
+            $(this).attr("disabled",true);
+        }
+       
+        $.ajax({
+            type: "POST",
+            url: "changeProductStatus.php",
+            data: {
+                id: id,
+                activeStatus: checkResult
+            },
+            success: function(res) {
+                location.reload();
+            }
+        });
+
+
+    });
+</script>
 <?php
 include "layout/footer.php";
 ?>

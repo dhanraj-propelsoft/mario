@@ -87,7 +87,7 @@ ON products.id = order_details.product_id;");
                 <th>Town</th>
                 <th>District</th>
                 <th>Address</th>
-                <th>Show Page</th>
+
                 <th>Order Confirm</th>
                 <th>Payment Confirm</th>
                 <th>Delivery Status </th>
@@ -110,20 +110,16 @@ ON products.id = order_details.product_id;");
                         <td><?php echo $row['town']; ?></td>
                         <td><?php echo $row['cityName']; ?></td>
                         <td><?php echo $row['address']; ?></td>
-                        <td> <label class="switch ">
-                                <input type="checkbox" class="showPageSwitch" data-id="<?php echo $row['id']; ?>">
+                        <td> <label class="switch">
+                                <input type="checkbox" class="orderConfirmSwitch" <?php echo ($row['approval_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
                                 <span class="slider round"></span>
                             </label></td>
                         <td> <label class="switch">
-                                <input type="checkbox"  class="orderConfirmSwitch" <?php echo ($row['approval_status'])?"checked":""; ?> data-id="<?php echo $row['id']; ?>">
+                                <input type="checkbox" class="paymentConfirmSwitch" <?php echo ($row['transaction_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
                                 <span class="slider round"></span>
                             </label></td>
                         <td> <label class="switch">
-                                <input type="checkbox" >
-                                <span class="slider round"></span>
-                            </label></td>
-                        <td> <label class="switch">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" class="deliveryConfirmSwitch" <?php echo ($row['delivery_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
                                 <span class="slider round"></span>
                             </label></td>
                     </tr><?php
@@ -185,43 +181,79 @@ ON products.id = order_details.product_id;");
     $('.orderConfirmSwitch').on('change', function() {
         var id = $(this).attr('data-id');
         var isChecked = $(this).is(":checked");
-        console.log("crct part"+isChecked);
-        console.log("Notcrct part"+!isChecked);
         var checkResult = ($(this).is(":checked")) ? 1 : 0;
-      
 
-        var countName = "1";
-        var countCode = "1";
+        $.ajax({
+            type: "POST",
+            url: "changeProductStatus.php",
+            data: {
+                id: id,
+                approveStatus: checkResult
+            },
+            success: function(res) {
+                if (res == 1) {
 
-        swal({
-            title: "Looks like you're from " + countName + ". ",
-            text: "Go to our International Store? ",
-            imageUrl: 'https://www.countryflags.io/' + countCode + '/flat/64.png',
-            imageWidth: 128,
-            imageHeight: 128,
-            showCancelButton: true,
-            showConfirmButton: true,
-            confirmButtonText: 'Yes take me there',
-            cancelButtonText: 'Stay on U.S.A Site',
-            imageAlt: 'Custom image',
-            dangerMode: false,
-        }, function() {
-            $.ajax({
-                type: "POST",
-                url: "changeProductStatus.php",
-                data: {id: id, checkResult: checkResult},
-                success: function(res) {
-                   if(res ==1){
-                    console.log("if part");
                     $(this).attr("checked", isChecked);
-                   }else{
-                    console.log("elsepart");
-                    $('.orderConfirmSwitch').attr('checked', true);
-                   }
-                  
+                } else {
+
+                    $(this).attr('checked', !isChecked);
                 }
-            });
+
+            }
         });
+
+
+    });
+    $('.paymentConfirmSwitch').on('change', function() {
+        var id = $(this).attr('data-id');
+        var isChecked = $(this).is(":checked");
+        var checkResult = ($(this).is(":checked")) ? 1 : 0;
+
+        $.ajax({
+            type: "POST",
+            url: "changeProductStatus.php",
+            data: {
+                id: id,
+                transactionStatus: checkResult
+            },
+            success: function(res) {
+                if (res == 1) {
+
+                    $(this).attr("checked", isChecked);
+                } else {
+
+                    $(this).attr('checked', !isChecked);
+                }
+
+            }
+        });
+
+
+    });
+    $('.deliveryConfirmSwitch').on('change', function() {
+        var id = $(this).attr('data-id');
+        var isChecked = $(this).is(":checked");
+        var checkResult = ($(this).is(":checked")) ? 1 : 0;
+
+        $.ajax({
+            type: "POST",
+            url: "changeProductStatus.php",
+            data: {
+                id: id,
+                deliveryStatus: checkResult
+            },
+            success: function(res) {
+                if (res == 1) {
+
+                    $(this).attr("checked", isChecked);
+                } else {
+
+                    $(this).attr('checked', !isChecked);
+                }
+
+            }
+        });
+
 
     });
 </script>

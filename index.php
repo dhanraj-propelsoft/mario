@@ -1,7 +1,7 @@
 <?php
 include 'layout/header.php';
 include 'config/config.php';
-$productList = mysqli_query($con, "select*from products");
+$productList = mysqli_query($con, "select*from products WHERE active_status='1' LIMIT 1");
 ?>
 <link rel="stylesheet" href="assets/css/splashScreen.css">
 
