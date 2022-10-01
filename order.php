@@ -2,6 +2,9 @@
 include 'layout/header.php';
 include 'config/config.php';
 $productId = $_GET['productId'];
+$productList = mysqli_query($con, "select*from products  where id='$productId'");
+$resultData = $productList->fetch_array(MYSQLI_ASSOC);
+$quantity = $resultData['quantity'];
 ?>
 <div class="main-container">
   <div class="sub-container-A">
@@ -56,7 +59,7 @@ $productId = $_GET['productId'];
 
       <fieldset class="dual-input">
         <label for="">Quantity</label>
-        <input class='range__slider' id='slider' max='20' min='1' oninput='amount.value=slider.value' type='range' value='1'>
+        <input class='range__slider' id='slider' max='<?php echo $quantity; ?>' min='1' oninput='amount.value=slider.value' type='range' value='1'>
         <input class='range__amount' id='amount' oninput='slider.value=amount.value' type='text' value='1' readonly name="quantity">
       </fieldset>
       <button class="btn-bn" type="submit">Confirm order</button>

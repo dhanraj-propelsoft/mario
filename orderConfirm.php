@@ -31,8 +31,8 @@ VALUES('$productId',
 
 $run_order = mysqli_query($con, $insert_order);
 if ($run_order) {
-    echo "<script>alert('product has been inserted successfully')</script>";
-    echo "<script>window.open('index.php', '_self')</script>";
+    echo "<script>alert('Order Request has been Completed successfully')</script>";
+    echo "<script>window.open('bankDetails.php', '_self')</script>";
 } else {
     echo mysqli_error($con);
 }
