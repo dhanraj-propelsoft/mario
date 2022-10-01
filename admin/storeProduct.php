@@ -1,5 +1,6 @@
 
 <?php
+$page="product";  
 include '../config/config.php';
 $date = $_POST['date'];
 

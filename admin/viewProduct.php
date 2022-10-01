@@ -13,6 +13,7 @@
 
 </style>
 <?php
+$page="product";  
 include "layout/header.php";
 include '../config/config.php';
 $id = $_GET['product_id'];

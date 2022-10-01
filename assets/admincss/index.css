@@ -579,7 +579,7 @@ ul.menu a{
   color: black;
 }
 ul.menu li:hover{
-  background-color: rgb(255, 31, 31);
+  background-color: rgb(128, 0, 128);
   color: white;
 } 
 ul.menu li:hover svg{
@@ -638,3 +638,8 @@ button:hover {
   background-color: rgba(17, 0, 255, 1);
 }
 
+ul.menu li.active{
+  background-color: rgb(0, 218, 44);
+  color: white;
+  fill: white;
+}

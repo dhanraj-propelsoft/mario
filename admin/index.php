@@ -1,4 +1,5 @@
 <?php
+$page="product";  
 include "layout/header.php";
 include '../config/config.php';
 
@@ -183,5 +184,6 @@ $productList = mysqli_query($con, "select*from products");
     });
 </script>
 <?php
+  
 include "layout/footer.php";
 ?>

@@ -1,4 +1,5 @@
 <?php
+$page="product";  
 include "layout/header.php";
 include '../config/config.php';
 
@@ -10,9 +11,9 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
 <style>
-    * {
+    /* * {
         box-sizing: border-box;
-    }
+    } */
 
     input[type=text],input[type=date],
     input[type=number],

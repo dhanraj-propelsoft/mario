@@ -1,4 +1,5 @@
 <?php
+$page="product";  
 include '../config/config.php';
 $id = $_POST["id"];
 $productName = $_POST["productName"];

@@ -1,4 +1,5 @@
 <?php
+$page="cr";  
 include "layout/header.php";
 include '../config/config.php';
 $orderList = mysqli_query($con, "select order_details.*, products.name as productName,order_details.date,cities.name as cityName from order_details LEFT JOIN cities
@@ -283,5 +284,6 @@ ON products.id = order_details.product_id ORDER BY id DESC ;");
     });
 </script>
 <?php
+
 include "layout/footer.php";
 ?>

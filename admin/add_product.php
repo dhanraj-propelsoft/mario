@@ -1,4 +1,5 @@
 <?php
+$page="product";  
 include "layout/header.php";
 include '../config/config.php'; ?>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
