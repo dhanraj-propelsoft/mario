@@ -69,8 +69,6 @@ $productList = mysqli_query($con, "select*from products");
 </style>
 <h1>Products</h1>
 
-<br>
-<br>
 <div class="container">
 <a href="add_product.php"><button style="float:right;height:30px;width:150px;margin:40px 40px 5px 0;">Add Product</button></a>
     <table>

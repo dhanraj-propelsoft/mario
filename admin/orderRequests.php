@@ -3,7 +3,7 @@ include "layout/header.php";
 include '../config/config.php';
 $orderList = mysqli_query($con, "select order_details.*, products.name as productName,order_details.date,cities.name as cityName from order_details LEFT JOIN cities
 ON cities.id = order_details.dist_id LEFT JOIN products
-ON products.id = order_details.product_id;");
+ON products.id = order_details.product_id ORDER BY id DESC ;");
 ?>
 
 <center>
@@ -111,11 +111,11 @@ ON products.id = order_details.product_id;");
                         <td><?php echo $row['cityName']; ?></td>
                         <td><?php echo $row['address']; ?></td>
                         <td> <label class="switch">
-                                <input type="checkbox" class="orderConfirmSwitch" <?php echo ($row['approval_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
+                                <input type="checkbox" class="orderConfirmSwitch" <?php echo ($row['approval_status']) ? "disabled" : ""; ?> <?php echo ($row['approval_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
                                 <span class="slider round"></span>
                             </label></td>
                         <td> <label class="switch">
-                                <input type="checkbox" class="paymentConfirmSwitch" <?php echo ($row['transaction_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
+                                <input type="checkbox" class="paymentConfirmSwitch" <?php echo ($row['transaction_status']) ? "disabled" : ""; ?> <?php echo ($row['transaction_status']) ? "checked" : ""; ?> data-id="<?php echo $row['id']; ?>">
                                 <span class="slider round"></span>
                             </label></td>
                         <td> <label class="switch">
@@ -179,82 +179,107 @@ ON products.id = order_details.product_id;");
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
 <script type="text/javascript">
     $('.orderConfirmSwitch').on('change', function() {
-        var id = $(this).attr('data-id');
-        var isChecked = $(this).is(":checked");
-        var checkResult = ($(this).is(":checked")) ? 1 : 0;
+        if (ConfirmDelete()) {
 
-        $.ajax({
-            type: "POST",
-            url: "changeProductStatus.php",
-            data: {
-                id: id,
-                approveStatus: checkResult
-            },
-            success: function(res) {
-                if (res == 1) {
+            var id = $(this).attr('data-id');
+            var isChecked = $(this).is(":checked");
+            var checkResult = ($(this).is(":checked")) ? 1 : 0;
 
-                    $(this).attr("checked", isChecked);
-                } else {
-
-                    $(this).attr('checked', !isChecked);
+            $.ajax({
+                type: "POST",
+                url: "changeProductStatus.php",
+                data: {
+                    id: id,
+                    approveStatus: checkResult
+                },
+                success: function(res) {
+                    console.log(res);
+                    //window.location.reload(true);
+                    if (res == "OutOfStock") {
+                        alert("out of stock");
+                        window.location.reload(true);
+                    }else if(res == "Failed"){
+                        alert("Something Wrong On");
+                        window.location.reload(true);
+                    }else{
+                        alert("Successfully Confirmed Order");
+                        window.location.reload(true);
+                    }
                 }
 
-            }
-        });
+            });
 
+        } else {
+            console.log("else spot");
+            if ($(this).is(':checked'))
+                $(this).prop('checked', false);
+            else
+                $(this).prop('checked', true);
+        }
 
     });
+
+    function ConfirmDelete() {
+        return confirm("Are you sure you want to Update?");
+    }
+
     $('.paymentConfirmSwitch').on('change', function() {
-        var id = $(this).attr('data-id');
-        var isChecked = $(this).is(":checked");
-        var checkResult = ($(this).is(":checked")) ? 1 : 0;
+        if (ConfirmDelete()) {
 
-        $.ajax({
-            type: "POST",
-            url: "changeProductStatus.php",
-            data: {
-                id: id,
-                transactionStatus: checkResult
-            },
-            success: function(res) {
-                if (res == 1) {
+            console.log("if spot");
 
-                    $(this).attr("checked", isChecked);
-                } else {
+            var id = $(this).attr('data-id');
+            var isChecked = $(this).is(":checked");
+            var checkResult = ($(this).is(":checked")) ? 1 : 0;
 
-                    $(this).attr('checked', !isChecked);
+            $.ajax({
+                type: "POST",
+                url: "changeProductStatus.php",
+                data: {
+                    id: id,
+                    transactionStatus: checkResult
+                },
+                success: function(res) {
+                    window.location.reload(true);
+
                 }
-
-            }
-        });
+            });
 
 
+        } else {
+            console.log("else spot")
+            if ($(this).is(':checked'))
+                $(this).prop('checked', false);
+            else
+                $(this).prop('checked', true);
+        }
     });
     $('.deliveryConfirmSwitch').on('change', function() {
-        var id = $(this).attr('data-id');
-        var isChecked = $(this).is(":checked");
-        var checkResult = ($(this).is(":checked")) ? 1 : 0;
 
-        $.ajax({
-            type: "POST",
-            url: "changeProductStatus.php",
-            data: {
-                id: id,
-                deliveryStatus: checkResult
-            },
-            success: function(res) {
-                if (res == 1) {
+        if (ConfirmDelete()) {
+            var id = $(this).attr('data-id');
+            var isChecked = $(this).is(":checked");
+            var checkResult = ($(this).is(":checked")) ? 1 : 0;
 
-                    $(this).attr("checked", isChecked);
-                } else {
+            $.ajax({
+                type: "POST",
+                url: "changeProductStatus.php",
+                data: {
+                    id: id,
+                    deliveryStatus: checkResult
+                },
+                success: function(res) {
+                    window.location.reload(true);
 
-                    $(this).attr('checked', !isChecked);
                 }
-
-            }
-        });
-
-
+            });
+        } else {
+            console.log("else spot")
+            if ($(this).is(':checked'))
+                $(this).prop('checked', false);
+            else
+                $(this).prop('checked', true);
+        }
     });
 </script>
 <?php
