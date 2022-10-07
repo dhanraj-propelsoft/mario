@@ -1,15 +1,19 @@
 <?php
-$page="product";  
+$page = "product";
 include "layout/header.php";
 include '../config/config.php'; ?>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
 <style>
     /* * {
         box-sizing: border-box;
     } */
 
     input[type=text],
-    input[type=date], input[type=number],
+    input[type=date],
+    input[type=number],
     select,
     textarea {
         width: 100%;
@@ -62,6 +66,73 @@ include '../config/config.php'; ?>
         display: table;
         clear: both;
     }
+
+    /* image upload start*/
+
+    .profilepic {
+        position: relative;
+        width: 250px;
+        height: 250px;
+        
+        overflow: hidden;
+        background-color: #111;
+    }
+
+    .profilepic:hover .profilepic__content {
+        opacity: 1;
+    }
+
+    .profilepic:hover .profilepic__image {
+        opacity: .5;
+    }
+
+    .profilepic__image {
+
+        background-position: center;
+        background-size: cover;
+        object-fit: none;
+        opacity: 1;
+        transition: opacity .2s ease-in-out;
+    }
+
+    .profilepic__content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+    }
+
+    .profilepic__icon {
+        color: white;
+        padding-bottom: 8px;
+    }
+
+    .fas {
+        font-size: 20px;
+    }
+
+    .profilepic__text {
+        text-transform: uppercase;
+        font-size: 12px;
+        width: 50%;
+        text-align: center;
+    }
+
+    .btn-rmv1 {
+        height: 40px;
+        width: 250px;
+       
+    }
+
+    /* image upload end*/
 
     /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
     @media screen and (max-width: 600px) {
@@ -179,23 +250,104 @@ include '../config/config.php'; ?>
 
         <div class="row">
             <div class="col-25">
-                <label for="files">Image(Only 3 Images)</label>
+                <label for="files">Image</label>
             </div>
-            <div class="col-75">
-                <input type="file" id="files" name="files[]" multiple />
+
+            <div class="col-25">
+                <div class="profilepic">
+                    <label for="imgInp1">
+                        <input accept="image/*" type='file' id="imgInp1" name="files[]" style="display:none" />
+                        <img id="blah1" class="profilepic__image w-100 h-100 " src="" alt="your image" />
+                        <div class="profilepic__content">
+                            <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+                            <span class="profilepic__text">Add Image</span>
+                        </div>
+                    </label>
+
+                </div>
+                <input type="button" id="removeImage1" value="Remove Image" class="btn-rmv1" />
+
             </div>
+            <div class="col-25">
+                <div class="profilepic">
+                    <label for="imgInp2">
+                        <input accept="image/*" type='file' id="imgInp2" name="files[]" style="display:none" />
+                        <img id="blah2" class="profilepic__image " src="" alt="your image" />
+                        <div class="profilepic__content">
+                            <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+                            <span class="profilepic__text">Add Image</span>
+
+                        </div>
+                    </label>
+                </div>
+                <input type="button" id="removeImage2" value="Remove Image" class="btn-rmv1" />
+            </div>
+
+            <div class="col-25">
+                <div class="profilepic">
+                    <label for="imgInp3">
+                        <input accept="image/*" type='file' id="imgInp3" name="files[]" style="display:none"/>
+                        <img id="blah3" class="profilepic__image " src="" alt="your image" />
+                        <div class="profilepic__content">
+                            <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
+                            <span class="profilepic__text">Add Image</span>
+                        </div>
+                    </label>
+                </div>
+                <input type="button" id="removeImage3" value="Remove Image" class="btn-rmv1" />
+            </div>
+
         </div>
+</div>
 
-        <br>
-        <div class="col-md-3 col-sm-3 col-xs-3">
+<br>
+<div class="col-md-3 col-sm-3 col-xs-3">
 
-            <div class="row">
-                <input type="submit" value="Submit">
-                <button type="button" onclick="location.href='index.php'" class="cancelBtn">Cancel</button>&nbsp;&nbsp;
-            </div>
+    <div class="row">
+        <input type="submit" value="Submit">
+        <button type="button" onclick="location.href='index.php'" class="cancelBtn">Cancel</button>&nbsp;&nbsp;
+    </div>
     </form>
 </div>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#removeImage1").click(function(e) {
+        e.preventDefault();
+        $("#imgInp1").val("");
+        $("#blah1").attr("src", "");
+    });
+    $("#removeImage2").click(function(e) {
+        e.preventDefault();
+        $("#imgInp2").val("");
+        $("#blah2").attr("src", "");
+    });
+    $("#removeImage3").click(function(e) {
+        e.preventDefault();
+        $("#imgInp3").val("");
+        $("#blah3").attr("src", "");
+    });
+</script>
+<script>
+    imgInp1.onchange = evt => {
+        const [file] = imgInp1.files
+        if (file) {
+            blah1.src = URL.createObjectURL(file)
+        }
+    }
+    imgInp2.onchange = evt => {
+        const [file] = imgInp2.files
+        if (file) {
+            blah2.src = URL.createObjectURL(file)
+        }
+    }
+    imgInp3.onchange = evt => {
+        const [file] = imgInp3.files
+        if (file) {
+            blah3.src = URL.createObjectURL(file)
+        }
+    }
+</script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#order_form").validate({

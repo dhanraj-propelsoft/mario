@@ -1,5 +1,5 @@
 <?php
-$page="product";  
+$page = "product";
 include "layout/header.php";
 include '../config/config.php';
 
@@ -15,7 +15,8 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
         box-sizing: border-box;
     } */
 
-    input[type=text],input[type=date],
+    input[type=text],
+    input[type=date],
     input[type=number],
     select,
     textarea {
@@ -40,6 +41,7 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
         cursor: pointer;
         float: right;
     }
+
     .cancelBtn {
         background-color: orange;
         color: white;
@@ -47,7 +49,8 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
         border: none;
         border-radius: 4px;
         cursor: pointer;
-        float: right; margin-right: 5px;
+        float: right;
+        margin-right: 5px;
     }
 
 
@@ -71,6 +74,12 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
         float: left;
         width: 50%;
         margin-top: 6px;
+    }
+
+    .btn-rmv1 {
+        height: 40px;
+        width: 250px;
+
     }
 
     /* Clear floats after the columns */
@@ -124,8 +133,8 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
     /* upload image */
     .profilepic {
         position: relative;
-        width: 260px;
-        height: 260px;
+        width: 250px;
+        height: 250px;
         /* border-radius: 50%; */
         overflow: hidden;
         background-color: #111;
@@ -183,24 +192,25 @@ $productList = mysqli_query($con, "select*from products  where id='$id'");
 while ($row = mysqli_fetch_array($productList)) {
     $path = "../uploads/";
 
-    ?>
+?>
     <div class="container">
         <form enctype="multipart/form-data" action="updateProduct.php" method="post" id="order_form">
-        <div class="row">
-            <div class="col-25">
-                <label for="date">Date</label>
+            <input type="hidden" id="id" value="<?php echo $id ?>">
+            <div class="row">
+                <div class="col-25">
+                    <label for="date">Date</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" id="date" name="date" required="required" value="<?php echo $row['date']; ?>">
+                </div>
             </div>
-            <div class="col-75">
-                <input type="date" id="date" name="date" required="required" value="<?php echo $row['date']; ?>">
-            </div>
-        </div>
             <div class="row">
                 <div class="col-25">
                     <label for="productName">Product Name</label>
                 </div>
                 <div class="col-75">
                     <input type="text" id="productName" name="productName" placeholder="Product Name.." required="required" value="<?php echo $row['name']; ?>">
-                    <input type="hidden" id="id" name="id" placeholder="Product Name.." required="required" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" id="productId" name="id" placeholder="Product Name.." required="required" value="<?php echo $row['id']; ?>">
                 </div>
             </div>
             <div class="row">
@@ -251,8 +261,9 @@ while ($row = mysqli_fetch_array($productList)) {
                 <div class="col-25">
                     <label for="youtubeLink">Images</label>
                 </div>
+                <br>
                 <div class="col-25">
-                <input type="button" id="removeImage1" value="x" class="btn-rmv1" />
+
                     <div class="profilepic">
                         <label for="imgInp">
                             <input accept="image/*" type='file' id="imgInp" name="image1" style="display:none" />
@@ -263,9 +274,10 @@ while ($row = mysqli_fetch_array($productList)) {
                             </div>
                         </label>
                     </div>
+                    <input type="button" id="removeImage1" value="Remove Image" class="btn-rmv1 removeProductImage" imageValue="1" />
                 </div>
                 <div class="col-25">
-                <input type="button" id="removeImage2" value="x" class="btn-rmv1" />
+
                     <div class="profilepic">
                         <label for="imgInp1">
                             <input accept="image/*" type='file' id="imgInp1" name="image2" style="display:none" />
@@ -276,9 +288,10 @@ while ($row = mysqli_fetch_array($productList)) {
                             </div>
                         </label>
                     </div>
+                    <input type="button" id="removeImage2" value="Remove Image" class="btn-rmv1 removeProductImage" imageValue="2" />
                 </div>
                 <div class="col-25">
-                <input type="button" id="removeImage3" value="x" class="btn-rmv1" />
+
                     <div class="profilepic">
                         <label for="imgInp2">
                             <input accept="image/*" type='file' id="imgInp2" name="image3" style="display:none" />
@@ -287,11 +300,12 @@ while ($row = mysqli_fetch_array($productList)) {
                                 <span class="profilepic__icon"><i class="fas fa-camera"></i></span>
                                 <span class="profilepic__text">Change Image</span>
                             </div>
-                        </label>                     
+                        </label>
                     </div>
-                   
+                    <input type="button" id="removeImage3" value="Remove Image" class="btn-rmv1 removeProductImage" imageValue="3" />
+
                 </div>
-             
+
 
                 <!-- <label for="files">Image(Only 3 Images)</label> -->
 
@@ -302,35 +316,130 @@ while ($row = mysqli_fetch_array($productList)) {
 
             <br>
             <div class="col-md-3 col-sm-3 col-xs-3">
-          
+
                 <div class="row">
-              
+
                     <input type="submit" value="Submit">
-                 
-              
-                <button type="button"  onclick="location.href='index.php'" class="cancelBtn" >Cancel</button>&nbsp;&nbsp;
-            </div>
-        
+
+
+                    <button type="button" onclick="location.href='index.php'" class="cancelBtn">Cancel</button>&nbsp;&nbsp;
+                </div>
+
         </form>
     </div><?php } ?>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
 <script type="text/javascript">
-  $("#removeImage1").click(function(e) {
-  e.preventDefault();
-  $("#imgInp").val("");
-  $("#blah").attr("src", "");
-});
-$("#removeImage2").click(function(e) {
-  e.preventDefault();
-  $("#imgInp1").val("");
-  $("#blah1").attr("src", "");
-});
-$("#removeImage3").click(function(e) {
-  e.preventDefault();
-  $("#imgInp2").val("");
-  $("#blah2").attr("src", "");
-});
-    
+    function removeImage(imageValue) {
+        var num = document.getElementById("productId").value;
+        $.ajax({
+            url: 'remove.php',
+            type: "post",
+            data: {
+                id: num,
+                value: imageValue,
+
+            },
+            dataType: "text",
+            success: function(result) {
+                if (result) {
+                    if (imageValue == 1) {
+                        $("#imgInp").val("");
+                        $("#blah").attr("src", "");
+                    } else if (imageValue == 2) {
+                        $("#imgInp1").val("");
+                        $("#blah1").attr("src", "");
+                    } else if (imageValue == 3) {
+                        $("#imgInp2").val("");
+                        $("#blah2").attr("src", "");
+                    }
+
+                }
+            }
+
+        });
+    }
+    $(".removeProductImage").click(function(e) {
+        e.preventDefault();
+        var $imagevalue = $(this).attr("imageValue");
+        if (confirm("Are You Sure To Delete This Image")) {
+            removeImage($imagevalue);
+        }
+    });
+    // $("#removeImage11").click(function(e) {
+    //     e.preventDefault();
+    //     $(this).attr(data - imageValue);
+
+    //     if (confirm("Are You Sure To Delete This Image")) {
+    //         $.ajax({
+    //             url: 'remove.php',
+    //             type: "post",
+    //             data: {
+    //                 id: num,
+    //                 value: "1",
+
+    //             },
+    //             dataType: "text",
+    //             success: function(result) {
+    //                 console.log(result);
+    //                 if (result) {
+    //                     $("#imgInp").val("");
+    //                     $("#blah").attr("src", "");
+    //                 }
+    //             }
+
+    //         });
+
+
+
+
+
+    //     }
+    // });
+    // $("#removeImage21").click(function(e) {
+
+
+    //     var num = document.getElementById("productId").value;
+
+    //     $.ajax({
+    //         url: 'remove.php',
+    //         type: "post",
+    //         data: {
+    //             id: num,
+    //             value: "2",
+
+    //         },
+    //         dataType: "text",
+
+    //     });
+
+
+    //     e.preventDefault();
+    //     $("#imgInp1").val("");
+    //     $("#blah1").attr("src", "");
+    // });
+    // $("#removeImage31").click(function(e) {
+
+
+    //     var num = document.getElementById("productId").value;
+
+    //     $.ajax({
+    //         url: 'remove.php',
+    //         type: "post",
+    //         data: {
+    //             id: num,
+    //             value: "3",
+
+    //         },
+    //         dataType: "text",
+
+    //     });
+
+
+    //     e.preventDefault();
+    //     $("#imgInp2").val("");
+    //     $("#blah2").attr("src", "");
+    // });
+
     $(document).ready(function() {
         $("#order_form").validate({
             rules: {
@@ -374,7 +483,7 @@ $("#removeImage3").click(function(e) {
             }
         }
 
-      
+
         if (window.File && window.FileList && window.FileReader) {
 
             $("#files").on("change", function(e) {
