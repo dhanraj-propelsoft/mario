@@ -1,5 +1,10 @@
 
 $(document).ready(function(){
+  document.onreadystatechange = function () {
+    if (document.readyState === 'complete') {
+      $("body").removeClass('spinner');
+    }
+  }
 	$('#nav-icon').click(function(){
 		$(this).toggleClass('open');
 	});
